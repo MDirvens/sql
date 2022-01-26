@@ -1,4 +1,4 @@
-import { ACTORS, DIRECTORS, GENRES, KEYWORDS, MOVIES, PRODUCTION_COMPANIES } from "../table-names";
+import { ACTORS, DIRECTORS, GENRES, KEYWORDS, MOVIES, MOVIE_RATINGS, PRODUCTION_COMPANIES } from "../table-names";
 
 export const selectActorByName = (fullName: string): string => {
   return `Select * from ${ACTORS}
@@ -60,13 +60,14 @@ export const selectMovie = (imdbId: string): string => {
   WHERE imdb_id = '${imdbId}'`
 };
 
-export const selectMovieId = (id: string): string => {
-  return `Select * from ${MOVIES}
-  WHERE id = '${id}'`
+export const selectMovieId = (imdbId: string): string => {
+  return `Select id from ${MOVIES}
+  WHERE imdb_id = '${imdbId}'`
 };
 
 export const selectRatingsByUserID = (userId: number): string => {
-  throw new Error(`todo`);
+  return `Select * from ${MOVIE_RATINGS}
+  WHERE user_id = '${userId}'`
 };
 
 export const selectGenresByMovieId = (movieId: number): string => {
