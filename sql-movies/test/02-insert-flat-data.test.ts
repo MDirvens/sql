@@ -60,7 +60,7 @@ const insertProductionCompanies = (companies: string[]) => {
 const insertMovies = (movies: Movie[]) => {
   return (
     `insert into movies (imdb_id, popularity, budget, budget_adjusted, revenue, revenue_adjusted,
-      original_title, homepage, tagline, overview, runtime, release_date) values` +
+     original_title, homepage, tagline, overview, runtime, release_date) values` +
     movies.map(movies => `('${escape(movies.imdbId)}', '${movies.popularity}', '${movies.budget}',
     '${movies.budgetAdjusted}', '${movies.revenue}', '${movies.revenueAdjusted}', 
     '${escape(movies.originalTitle)}', '${escape(movies.homepage)}', 

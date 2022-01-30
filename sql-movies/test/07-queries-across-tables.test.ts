@@ -1,4 +1,10 @@
 import { Database } from "../src/database";
+import { 
+  MOVIE_ACTORS, 
+  MOVIE_DIRECTORS, 
+  MOVIE_GENRES, 
+  MOVIE_KEYWORDS 
+} from "../src/table-names";
 import { minutes } from "./utils";
 
 describe("Queries Across Tables", () => {
@@ -13,12 +19,12 @@ describe("Queries Across Tables", () => {
     async done => {
       const query = `Select full_name AS director, 
                      ROUND(SUM(budget_adjusted),2) AS total_budget
-                     FROM movie_directors 
+                     FROM ${MOVIE_DIRECTORS} 
                      JOIN directors ON director_id = directors.id
                      JOIN movies ON movie_id = movies.id
                      GROUP BY full_name
                      ORDER BY SUM(budget_adjusted) DESC
-                     Limit 3`;
+                     LIMIT 3`;
 
       const result = await db.selectMultipleRows(query);
 
@@ -46,7 +52,7 @@ describe("Queries Across Tables", () => {
     "should select top 10 keywords ordered by their appearance in movies",
     async done => {
       const query = `Select keyword, COUNT(movies.id) AS count
-                     FROM movie_keywords 
+                     FROM ${MOVIE_KEYWORDS} 
                      JOIN keywords ON keyword_id = keywords.id
                      JOIN movies ON movie_id = movies.id
                      GROUP BY keyword
@@ -107,7 +113,7 @@ describe("Queries Across Tables", () => {
     "should select all movies called Life and return amount of actors",
     async done => {
       const query = `Select original_title, COUNT(actors.id) AS count
-                     FROM movie_actors 
+                     FROM ${MOVIE_ACTORS} 
                      JOIN actors ON actor_id = actors.id
                      JOIN movies ON movie_id = movies.id
                      WHERE original_title = 'Life'`;
@@ -128,7 +134,7 @@ describe("Queries Across Tables", () => {
     "should select three genres which has most ratings with 5 stars",
     async done => {
       const query = `Select  genre, COUNT(rating) AS five_stars_count
-                     FROM movie_genres 
+                     FROM ${MOVIE_GENRES} 
                      JOIN genres ON genre_id = genres.id
                      JOIN movie_ratings ON movie_genres.movie_id = movie_ratings.movie_id
                      WHERE rating = 5
@@ -162,7 +168,7 @@ describe("Queries Across Tables", () => {
     "should select top three genres ordered by average rating",
     async done => {
       const query = `Select  genre, ROUND(AVG(rating),2) AS avg_rating
-                     FROM movie_genres 
+                     FROM ${MOVIE_GENRES} 
                      JOIN genres ON genre_id = genres.id
                      JOIN movie_ratings ON movie_genres.movie_id = movie_ratings.movie_id
                      GROUP BY genre
