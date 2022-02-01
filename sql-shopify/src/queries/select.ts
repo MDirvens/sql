@@ -2,7 +2,8 @@ import {
   CATEGORIES,
   APPS_CATEGORIES,
   REVIEWS, 
-  APPS} from "../shopify-table-names";
+  APPS
+} from "../shopify-table-names";
 
 export const selectCount = (table: string): string => {
   return `SELECT COUNT(*) AS c FROM ${table}`;

@@ -3,11 +3,13 @@ import { minutes } from "./utils";
 import { 
     selectRowById, 
     selectReviewByAppIdAuthor, 
-    selectColumnFromTable } from "../src/queries/select";
+    selectColumnFromTable 
+} from "../src/queries/select";
 import { 
     APPS, 
     CATEGORIES, 
-    REVIEWS } from "../src/shopify-table-names";
+    REVIEWS 
+} from "../src/shopify-table-names";
 import moment from "moment";
 
 describe("Update Statements", () => {

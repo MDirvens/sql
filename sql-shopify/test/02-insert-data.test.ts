@@ -18,7 +18,7 @@ import {
     REVIEWS, 
     APPS_CATEGORIES, 
     APPS_PRICING_PLANS 
-    } from "../src/shopify-table-names";
+} from "../src/shopify-table-names";
 import { escape } from "../src/utils";
 import { minutes, seconds } from "./utils";
 import { 
@@ -27,7 +27,7 @@ import {
     selectCategoryByTitle, 
     selectAppCategoriesByAppId, 
     selectUnigueRowCount 
-    } from "../src/queries/select";
+} from "../src/queries/select";
 import { resolve } from "path";
 
 const pricingPlansDir = resolve(__dirname, "../_data/pricing_plans.csv");
@@ -108,6 +108,7 @@ const insertReviews = (reviews: Review[]) => {
 const insertAppPricingPlans = (pricingPlans: PricingPlan[], prices: PricingPlanPrice[]) => {
     return (
         `INSERT INTO ${APPS_PRICING_PLANS} (app_id, pricing_plan_id) VALUES` + 
+
         pricingPlans.map(pricingPlan => 
             `('${pricingPlan.shopifyAppId}', 
               '${prices.find(it => it.price === pricingPlan.price)!.id}')
