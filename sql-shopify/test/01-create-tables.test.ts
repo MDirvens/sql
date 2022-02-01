@@ -34,6 +34,8 @@ const CREATE_APPS_CATEGORIES_TABLE = `CREATE TABLE ${APPS_CATEGORIES} (
     app_id integer NOT NULL,
     category_id integer NOT NULL,
     PRIMARY KEY (app_id, category_id)
+    FOREIGN KEY (app_id) REFERENCES ${APPS}(id),
+    FOREIGN KEY (category_id) REFERENCES ${CATEGORIES}(id) ON DELETE RESTRICT
 )`;
 
 const CREATE_KEY_BENEFITS_TABLE = `CREATE TABLE ${KEY_BENEFITS} (
@@ -52,6 +54,8 @@ const CREATE_APPS_PRICING_PLANS_TABLE = `CREATE TABLE ${APPS_PRICING_PLANS} (
     app_id integer NOT NULL,
     pricing_plan_id integer NOT NULL, 
     PRIMARY KEY (app_id, pricing_plan_id)
+    FOREIGN KEY (app_id) REFERENCES ${APPS}(id),
+    FOREIGN KEY (pricing_plan_id) REFERENCES ${PRICING_PLANS}(id) ON DELETE RESTRICT
 )`;
 
 const CREATE_REVIEWS_TABLE = `CREATE TABLE ${REVIEWS} (
