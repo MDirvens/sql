@@ -9,9 +9,11 @@ import {
 import { MOVIE_RATINGS } from "../src/table-names";
 import { Rating } from "../src/data/types";
 import { minutes } from "./utils";
+import { escape } from "../src/utils";
 
 const insertRatings = (movieId: number, ratings: Rating[]) => {
-  throw new Error(`todo`);
+  return (`insert into ${MOVIE_RATINGS} (user_id, movie_id, rating, time_created) values`+
+  ratings.map(rating => `(${rating.userId}, ${movieId}, ${rating.rating}, '${escape(rating.time_created)}')`))
 };
 
 describe("Insert Combined Data", () => {
